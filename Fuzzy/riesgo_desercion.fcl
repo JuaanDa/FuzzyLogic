@@ -16,6 +16,7 @@ VAR_OUTPUT
 END_VAR
 
 FUZZIFY promedio
+//mebresia nivel de pertencia 1 o 0
     TERM bajo := (0,1) (2,1) (3,0);
     TERM medio := (2.5,0) (3.2,1) (4,0);
     TERM alto := (3.5,0) (4.4,1) (5,1);
@@ -28,15 +29,15 @@ FUZZIFY asistencia
 END_FUZZIFY
 
 FUZZIFY economia
-    TERM mala := (0,1) (3,1) (5,0);
-    TERM regular := (3,0) (5,1) (7,0);
-    TERM buena := (6,0) (8,1) (10,1);
+    TERM mala := (0,1) (30,1) (50,0);
+    TERM regular := (30,0) (50,1) (70,0);
+    TERM buena := (60,0) (80,1) (100,1);
 END_FUZZIFY
 
 FUZZIFY psicosociales
-    TERM inestable := (0,1) (3,1) (5,0);
-    TERM medio := (3,0) (5,1) (7,0);
-    TERM estable := (6,0) (8,1) (10,1);
+    TERM inestable := (0,1) (10,1) (15,0);
+    TERM medio := (10,0) (15,1) (20,0);
+    TERM estable := (18,0) (25,1) (30,1);
 END_FUZZIFY
 
 FUZZIFY edad
@@ -55,7 +56,75 @@ DEFUZZIFY riesgo
     TERM bajo := (0,1) (25,1) (50,0);
     TERM medio := (30,0) (50,1) (70,0);
     TERM alto := (60,0) (80,1) (100,1);
+    //método de desfuzzificación
+    //calcula el valor medio ponderado bajo la curva combinada de los conjuntos difusos.
     METHOD : COG;
+    //valor por default para evitar errores
+    DEFAULT := 0;
+END_DEFUZZIFY
+
+// Archivo: riesgo_desercion.fcl
+
+FUNCTION_BLOCK riesgo_desercion
+
+VAR_INPUT
+    promedio : REAL;
+    asistencia : REAL;
+    economia : REAL;
+    psicosociales : REAL;
+    edad : REAL;
+    semestre : REAL;
+END_VAR
+
+VAR_OUTPUT
+    riesgo : REAL;
+END_VAR
+
+FUZZIFY promedio
+//mebresia nivel de pertencia 1 o 0
+    TERM bajo := (0,1) (2,1) (3,0);
+    TERM medio := (2.5,0) (3.2,1) (4,0);
+    TERM alto := (3.5,0) (4.4,1) (5,1);
+END_FUZZIFY
+
+FUZZIFY asistencia
+    TERM baja := (0,1) (50,1) (60,0);
+    TERM media := (50,0) (70,1) (80,0);
+    TERM alta := (70,0) (90,1) (100,1);
+END_FUZZIFY
+
+FUZZIFY economia
+    TERM mala := (0,1) (30,1) (50,0);
+    TERM regular := (30,0) (50,1) (70,0);
+    TERM buena := (60,0) (80,1) (100,1);
+END_FUZZIFY
+
+FUZZIFY psicosociales
+    TERM inestable := (0,1) (10,1) (15,0);
+    TERM medio := (10,0) (15,1) (20,0);
+    TERM estable := (18,0) (25,1) (30,1);
+END_FUZZIFY
+
+FUZZIFY edad
+    TERM joven := (15,1) (18,1) (22,0);
+    TERM media := (20,0) (23,1) (26,0);
+    TERM mayor := (25,0) (30,1) (40,1);
+END_FUZZIFY
+
+FUZZIFY semestre
+    TERM bajo := (1,1) (3,1) (4,0);
+    TERM medio := (3,0) (5,1) (7,0);
+    TERM alto := (6,0) (8,1) (10,1);
+END_FUZZIFY
+
+DEFUZZIFY riesgo
+    TERM bajo := (0,1) (25,1) (50,0);
+    TERM medio := (30,0) (50,1) (70,0);
+    TERM alto := (60,0) (80,1) (100,1);
+    //método de desfuzzificación
+    //calcula el valor medio ponderado bajo la curva combinada de los conjuntos difusos.
+    METHOD : COG;
+    //valor por default para evitar errores
     DEFAULT := 0;
 END_DEFUZZIFY
 
@@ -64,13 +133,19 @@ RULEBLOCK reglas
     ACT : MIN;
     ACCU : MAX;
 
-    RULE 1 : IF promedio IS bajo OR asistencia IS baja OR economia IS mala THEN riesgo IS alto;
-    RULE 2 : IF promedio IS medio AND asistencia IS media AND economia IS regular THEN riesgo IS medio;
-    RULE 3 : IF promedio IS alto AND asistencia IS alta AND economia IS buena THEN riesgo IS bajo;
-    RULE 4 : IF psicosociales IS inestable THEN riesgo IS alto;
-    RULE 5 : IF psicosociales IS estable AND asistencia IS alta THEN riesgo IS bajo;
-    RULE 6 : IF edad IS mayor AND semestre IS bajo THEN riesgo IS alto;
-    RULE 7 : IF edad IS joven AND semestre IS alto THEN riesgo IS bajo;
+    // Filtro: Edad joven, semestre alto
+    RULE 1 : IF edad IS joven AND semestre IS alto AND promedio IS bajo THEN riesgo IS medio;
+    RULE 2 : IF edad IS joven AND semestre IS alto AND asistencia IS baja THEN riesgo IS medio;
+    RULE 3 : IF edad IS joven AND semestre IS alto AND economia IS mala THEN riesgo IS alto;
+
+    // Filtro: Edad mayor, semestre bajo
+    RULE 4 : IF edad IS mayor AND semestre IS bajo AND promedio IS bajo THEN riesgo IS alto;
+    RULE 5 : IF edad IS mayor AND semestre IS bajo AND asistencia IS baja THEN riesgo IS alto;
+    RULE 6 : IF edad IS mayor AND semestre IS bajo AND economia IS buena THEN riesgo IS medio;
+
+    // Psicosociales afecta siempre que esté inestable
+    RULE 7 : IF psicosociales IS inestable THEN riesgo IS alto;
+    RULE 8 : IF psicosociales IS estable AND asistencia IS alta THEN riesgo IS bajo;
 END_RULEBLOCK
 
 END_FUNCTION_BLOCK
