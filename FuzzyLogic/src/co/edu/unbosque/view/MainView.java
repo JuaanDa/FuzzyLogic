@@ -29,6 +29,8 @@ public class MainView extends JPanel {
         up.setBorder(null);
         FlowLayout flowLayout = (FlowLayout) up.getLayout();
         flowLayout.setVgap(20);
+        up.setPreferredSize(new Dimension(0, 80));
+
         up.setBackground(new Color(43, 123, 143));
         add(up, BorderLayout.NORTH);
 
@@ -40,8 +42,9 @@ public class MainView extends JPanel {
         Image scaledImage = originalIcon.getImage().getScaledInstance(60, 50, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         icon.setIcon(scaledIcon);
-        up.add(icon);
+        up.add(icon, BorderLayout.CENTER);
         
+
         // === FOOTER ===
         JPanel foot = new JPanel();
         foot.setBorder(null);
@@ -50,10 +53,23 @@ public class MainView extends JPanel {
         foot.setBackground(new Color(43, 123, 140));
         add(foot, BorderLayout.SOUTH);
 
-        JLabel footTitle = new JLabel("© 2025 Logica Difusa Universidad El Bosque");
-        footTitle.setForeground(new Color(255, 255, 255));
+        JLabel footTitle = new JLabel("© 2025 Lógica Difusa");
+        footTitle.setForeground(Color.WHITE);
         footTitle.setFont(new Font("Vensim Sans Mono", Font.PLAIN, 15));
         foot.add(footTitle);
+        
+        JLabel icon2 = new JLabel();
+        ImageIcon originalIcon2 = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\icon.png");
+        Image scaledImage2 = originalIcon2.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        icon2.setIcon(new ImageIcon(scaledImage2));
+        foot.add( icon2, BorderLayout.WEST);
+        
+
+        JLabel footTitle2 = new JLabel("Universidad El Bosque");
+        footTitle2.setForeground(Color.WHITE);
+        footTitle2.setFont(new Font("Vensim Sans Mono", Font.PLAIN, 15));
+        foot.add(footTitle2);
+        
 
      // === CENTER === 
         ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\UebMain.png");
