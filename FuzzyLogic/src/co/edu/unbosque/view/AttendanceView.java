@@ -6,14 +6,18 @@ import javax.swing.border.EmptyBorder;
 
 public class AttendanceView extends JPanel {
 
-    private JTextField asistenciasField;
+    private JTextField attendance;
     private JTextField clasesTotalesField;
-    private JButton enviarButton;
+    private JButton nextButton;
     private JButton backButton;
     private JLabel LabelPage;
 
 
     public AttendanceView() {
+    	
+    	
+    	// window
+
         setBorder(null);
         setPreferredSize(new Dimension(1261, 642));
         setLayout(new BorderLayout());
@@ -49,7 +53,7 @@ public class AttendanceView extends JPanel {
 
        
         JLabel icon = new JLabel();
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\ueb.png");
+        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\uebIcon.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(60, 50, Image.SCALE_SMOOTH);
         icon.setIcon(new ImageIcon(scaledImage));
         icon.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,7 +88,7 @@ public class AttendanceView extends JPanel {
         
 
         // CENTER
-        ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\uebmain4.png");
+        ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\AttendanceBackground.png");
         Image bgImage = bgIcon.getImage().getScaledInstance(1261, 520, Image.SCALE_SMOOTH);
         JLabel backgroundLabel = new JLabel(new ImageIcon(bgImage));
         backgroundLabel.setLayout(new GridBagLayout());
@@ -105,7 +109,7 @@ public class AttendanceView extends JPanel {
         gbc.gridwidth = 2;
 
         JLabel titleLabel = new JLabel("Registro de Asistencias");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         titleLabel.setForeground(Color.WHITE);
         formPanel.add(titleLabel, gbc);
 
@@ -127,20 +131,19 @@ public class AttendanceView extends JPanel {
         gbc.gridx = 1;
         gbc.gridy = 1;
 
-        asistenciasField = new JTextField(20);
-        formPanel.add(asistenciasField, gbc);
+        attendance = new JTextField(20);
+        formPanel.add(attendance, gbc);
 
         // Label Clases Totales
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 2;
-
+/*
         JLabel clasesLabel = new JLabel("Número total de clases:");
         clasesLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         clasesLabel.setForeground(Color.WHITE);
         formPanel.add(clasesLabel, gbc);
-
         // Campo Clases Totales
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -149,6 +152,7 @@ public class AttendanceView extends JPanel {
 
         clasesTotalesField = new JTextField(20);
         formPanel.add(clasesTotalesField, gbc);
+ */
 
         // Botón Enviar
         gbc = new GridBagConstraints();
@@ -158,26 +162,26 @@ public class AttendanceView extends JPanel {
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        enviarButton = new JButton("Siguiente");
-        enviarButton.setBackground(new Color(43, 123, 143));
-        enviarButton.setForeground(Color.WHITE);
-        enviarButton.setFont(new Font("Arial", Font.BOLD, 16));
-        formPanel.add(enviarButton, gbc);
+        nextButton = new JButton("Siguiente");
+        nextButton.setBackground(new Color(43, 123, 143));
+        nextButton.setForeground(Color.WHITE);
+        nextButton.setFont(new Font("Arial", Font.BOLD, 16));
+        formPanel.add(nextButton, gbc);
 
         backgroundLabel.add(formPanel, new GridBagConstraints());
         add(backgroundLabel, BorderLayout.CENTER);
     }
 
-    public JTextField getAsistenciasField() {
-        return asistenciasField;
+    public JTextField getAttendance() {
+        return attendance;
     }
 
     public JTextField getClasesTotalesField() {
         return clasesTotalesField;
     }
 
-    public JButton getEnviarButton() {
-        return enviarButton;
+    public JButton getNextButton() {
+        return nextButton;
     }
 
     public JButton getBackButton() {

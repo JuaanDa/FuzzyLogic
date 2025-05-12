@@ -27,7 +27,7 @@ public class ResumenView extends JPanel {
 
      
         JLabel icon = new JLabel();
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\ueb.png");
+        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\uebIcon.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(60, 50, Image.SCALE_SMOOTH);
         icon.setIcon(new ImageIcon(scaledImage));
         icon.setHorizontalAlignment(SwingConstants.CENTER);

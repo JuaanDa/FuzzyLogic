@@ -4,14 +4,16 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class PromView extends JPanel {
+public class AverageView extends JPanel {
 
-    private JTextField promedioField;
-    private JButton enviarButton;
+    private JTextField average;
+    private JButton nextButton;
     private JButton backButton;
     private JLabel LabelPage;
 
-    public PromView() {
+    public AverageView() {
+    	
+    	// window
         setBorder(null);
         setPreferredSize(new Dimension(1261, 642));
         setLayout(new BorderLayout());
@@ -46,7 +48,7 @@ public class PromView extends JPanel {
 
         
         JLabel icon = new JLabel();
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\ueb.png");
+        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\uebIcon.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(60, 50, Image.SCALE_SMOOTH);
         icon.setIcon(new ImageIcon(scaledImage));
         icon.setHorizontalAlignment(SwingConstants.CENTER);
@@ -81,7 +83,7 @@ public class PromView extends JPanel {
         
         
      // === CENTER ===
-        ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\main2.png");
+        ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\AverageBackground.png");
         Image bgImage = bgIcon.getImage().getScaledInstance(1261, 520, Image.SCALE_SMOOTH);
         JLabel backgroundLabel = new JLabel(new ImageIcon(bgImage));
         backgroundLabel.setLayout(new GridBagLayout()); // para centrar el formulario
@@ -100,7 +102,7 @@ public class PromView extends JPanel {
         gbc.gridwidth = 2;
 
         JLabel titleLabel = new JLabel("Ingrese su Promedio Académico");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
         titleLabel.setForeground(Color.white);
         formPanel.add(titleLabel, gbc);
 
@@ -121,8 +123,8 @@ public class PromView extends JPanel {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        promedioField = new JTextField(20);
-        formPanel.add(promedioField, gbc);
+        average = new JTextField(20);
+        formPanel.add(average, gbc);
 
         // Enviar Button
         gbc = new GridBagConstraints();
@@ -131,11 +133,11 @@ public class PromView extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 2;
-        enviarButton = new JButton("Siguiente");
-        enviarButton.setBackground(new Color(43, 123, 143));
-        enviarButton.setForeground(Color.WHITE);
-        enviarButton.setFont(new Font("Arial", Font.BOLD, 16));
-        formPanel.add(enviarButton, gbc);
+        nextButton = new JButton("Siguiente");
+        nextButton.setBackground(new Color(43, 123, 143));
+        nextButton.setForeground(Color.WHITE);
+        nextButton.setFont(new Font("Arial", Font.BOLD, 16));
+        formPanel.add(nextButton, gbc);
 
         // Agregar formPanel sobre la imagen
         backgroundLabel.add(formPanel, new GridBagConstraints());
@@ -145,15 +147,15 @@ public class PromView extends JPanel {
  
     }
 
-    public JTextField getPromedioField() {
-        return promedioField;
+    public JTextField getAverage() {
+        return average;
     }
 
     public JButton getBackButton() {
         return backButton;
     }
 
-    public JButton getEnviarButton() {
-        return enviarButton;
+    public JButton getNextButton() {
+        return nextButton;
     }
 }

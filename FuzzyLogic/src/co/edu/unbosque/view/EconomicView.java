@@ -7,11 +7,11 @@ import java.awt.*;
 
 public class EconomicView extends JPanel {
 
-    private JComboBox<String> ingresoCombo;
-    private JComboBox<String> gastoCombo;
-    private JComboBox<String> ahorroCombo;
-    private JSlider satisfaccionSlider;
-    private JButton enviarButton;
+    private JComboBox<String> monthlyIncome;
+    private JComboBox<String> monthlyExpense;
+    private JComboBox<String> monthlySavings;
+    private JSlider careerSatisfaction;
+    private JButton nextButton;
     private JButton backButton;
     private JLabel LabelPage;
 
@@ -48,7 +48,7 @@ public class EconomicView extends JPanel {
         up.add(LabelPage, BorderLayout.EAST);
 
         JLabel icon = new JLabel();
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\ueb.png");
+        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\uebIcon.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(60, 50, Image.SCALE_SMOOTH);
         icon.setIcon(new ImageIcon(scaledImage));
         icon.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,13 +84,13 @@ public class EconomicView extends JPanel {
 
         // ===== CENTER FORM =====
         
-        ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\ueb5.png");
+        ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\EconomicBackground.png");
         Image bgImage = bgIcon.getImage().getScaledInstance(1261, 520, Image.SCALE_SMOOTH);
         JLabel centerWrapper = new JLabel(new ImageIcon(bgImage));
         centerWrapper.setLayout(new GridBagLayout()); // para centrar el formulario
 
         JPanel formPanel = new JPanel(new GridBagLayout());
-        formPanel.setBackground(new Color(43, 123, 143, 128)); // puedes ajustar el color aquí (por ejemplo, un azul muy claro)
+        formPanel.setBackground(new Color(43, 123, 143, 128)); 
         formPanel.setPreferredSize(new Dimension(700, 400));
 
         GridBagConstraints gbc;
@@ -103,7 +103,7 @@ public class EconomicView extends JPanel {
                 gbc.anchor = GridBagConstraints.CENTER; 
                 gbc.insets = new Insets(10, 10, 20, 10);
                 JLabel titulo = new JLabel("Situación Económica");
-                titulo.setFont(new Font("Arial", Font.BOLD, 24));
+                titulo.setFont(new Font("Arial", Font.BOLD, 30));
                 titulo.setForeground(Color.WHITE);
                 formPanel.add(titulo, gbc);
         // Pregunta 1
@@ -112,16 +112,16 @@ public class EconomicView extends JPanel {
         gbc = new GridBagConstraints();
         gbc.gridx = 0; gbc.gridy = 1; gbc.anchor = GridBagConstraints.WEST; gbc.insets = new Insets(10,10,5,10);
         JLabel label1 = new JLabel("1) Ingreso mensual total:");
-        label1.setForeground(Color.WHITE); // Texto en blanco
-        label1.setFont(new Font("Arial", Font.BOLD, 18)); // Aumentamos el tamaño de la fuente
+        label1.setForeground(Color.WHITE); 
+        label1.setFont(new Font("Arial", Font.BOLD, 18)); 
         formPanel.add(label1, gbc);
 
-        ingresoCombo = new JComboBox<>(new String[]{
-            "Menos de $500.000", "$500.000 - $1.000.000",
-            "$1.000.000 - $2.000.000", "Más de $2.000.000"});
+        monthlyIncome = new JComboBox<>(new String[]{
+            "Menos de $1.600.000", "$1.600.000 - $2.100.000",
+            "$2.100.001 - $2.800.000", "Más de $2.800.000"});
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.insets = new Insets(10,10,5,10);
-        formPanel.add(ingresoCombo, gbc);
+        formPanel.add(monthlyIncome, gbc);
 
         // Pregunta 2
         gbc = new GridBagConstraints();
@@ -131,12 +131,12 @@ public class EconomicView extends JPanel {
         label2.setFont(new Font("Arial", Font.BOLD, 18)); // Aumentamos el tamaño de la fuente
         formPanel.add(label2, gbc);
 
-        gastoCombo = new JComboBox<>(new String[]{
-            "Menos de $400.000", "$400.000 - $800.000",
-            "$800.000 - $1.200.000", "Más de $1.200.000"});
+        monthlyExpense = new JComboBox<>(new String[]{
+            "Menos de $1.000.000", "$1.000.000 - $1.600.000",
+            "$1.600.001 - $2.500.000", "Más de $2.500.000"});
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 2; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.insets = new Insets(10,10,5,10);
-        formPanel.add(gastoCombo, gbc);
+        formPanel.add(monthlyExpense, gbc);
 
         // Pregunta 3
         gbc = new GridBagConstraints();
@@ -146,11 +146,11 @@ public class EconomicView extends JPanel {
         label3.setFont(new Font("Arial", Font.BOLD, 18)); // Aumentamos el tamaño de la fuente
         formPanel.add(label3, gbc);
 
-        ahorroCombo = new JComboBox<>(new String[]{
+        monthlySavings = new JComboBox<>(new String[]{
             "0%", "1% - 10%", "11% - 25%", "Más de 25%"});
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 3; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.insets = new Insets(10,10,5,10);
-        formPanel.add(ahorroCombo, gbc);
+        formPanel.add(monthlySavings, gbc);
 
         // Pregunta 4
         gbc = new GridBagConstraints();
@@ -160,36 +160,36 @@ public class EconomicView extends JPanel {
         label4.setFont(new Font("Arial", Font.BOLD, 18)); // Aumentamos el tamaño de la fuente
         formPanel.add(label4, gbc);
 
-        satisfaccionSlider = new JSlider(1, 10, 5);
-        satisfaccionSlider.setMajorTickSpacing(1);
-        satisfaccionSlider.setPaintTicks(true);
-        satisfaccionSlider.setPaintLabels(true);
+        careerSatisfaction = new JSlider(1, 10, 5);
+        careerSatisfaction.setMajorTickSpacing(1);
+        careerSatisfaction.setPaintTicks(true);
+        careerSatisfaction.setPaintLabels(true);
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 4; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.insets = new Insets(10,10,5,10);
-        formPanel.add(satisfaccionSlider, gbc);
+        formPanel.add(careerSatisfaction, gbc);
 
         centerWrapper.add(formPanel, new GridBagConstraints());
         
                 // Botón enviar
-                enviarButton = new JButton("Siguiente");
-                enviarButton.setBackground(new Color(255, 121, 0));
-                enviarButton.setForeground(Color.WHITE);
-                enviarButton.setFont(new Font("Arial", Font.BOLD, 26));
+                nextButton = new JButton("Siguiente");
+                nextButton.setBackground(new Color(255, 121, 0));
+                nextButton.setForeground(Color.WHITE);
+                nextButton.setFont(new Font("Arial", Font.BOLD, 26));
                 gbc = new GridBagConstraints();
                 gbc.gridx = 0; 
                 gbc.gridy = 6; 
                 gbc.gridwidth = 2; 
                 gbc.insets = new Insets(20, 10, 10, 10);
-                formPanel.add(enviarButton, gbc);
+                formPanel.add(nextButton, gbc);
         add(centerWrapper, BorderLayout.CENTER);
     }
 
     // === Getters ===
 
-    public JComboBox<String> getIngresoCombo() { return ingresoCombo; }
-    public JComboBox<String> getGastoCombo() { return gastoCombo; }
-    public JComboBox<String> getAhorroCombo() { return ahorroCombo; }
-    public JSlider getSatisfaccionSlider() { return satisfaccionSlider; }
-    public JButton getEnviarButton() { return enviarButton; }
+    public JComboBox<String> getMonthlyIncome() { return monthlyIncome; }
+    public JComboBox<String> getMonthlyExpense() { return monthlyExpense; }
+    public JComboBox<String> getMonthlySavings() { return monthlySavings; }
+    public JSlider getCareerSatisfaction() { return careerSatisfaction; }
+    public JButton getNextButton() { return nextButton; }
     public JButton getBackButton() { return backButton; }
 }

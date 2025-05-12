@@ -19,6 +19,10 @@ public class MainView extends JPanel {
     private JButton startButton;
 
     public MainView() {
+    	
+    	
+        // === WINDOW ===
+
         setBorder(null);
         setPreferredSize(new Dimension(1250, 642));
         setLayout(new BorderLayout());
@@ -38,7 +42,7 @@ public class MainView extends JPanel {
         icon.setEnabled(false);
         icon.setHorizontalAlignment(SwingConstants.LEFT);
 
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\ueb.png");
+        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\uebIcon.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(60, 50, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         icon.setIcon(scaledIcon);
@@ -72,7 +76,8 @@ public class MainView extends JPanel {
         
 
      // === CENTER === 
-        ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\UebMain.png");
+        
+        ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\MainBackground.png");
         Image bgImage = bgIcon.getImage().getScaledInstance(1261, 520, Image.SCALE_SMOOTH); // ajustar la altura
 
         JLabel backgroundLabel = new JLabel(new ImageIcon(bgImage));
@@ -92,7 +97,7 @@ public class MainView extends JPanel {
         title.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Subtítulo
-        JLabel subtitle = new JLabel("Evaluación de riesgo de deserción con lógica difusa");
+        JLabel subtitle = new JLabel("Evaluación de riesgo de deserción universitaria con lógica difusa");
         subtitle.setAlignmentX(CENTER_ALIGNMENT);
         subtitle.setFont(new Font("lucida Handwriting", Font.PLAIN, 20));
         subtitle.setForeground(Color.WHITE);

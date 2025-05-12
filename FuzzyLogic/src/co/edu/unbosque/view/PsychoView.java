@@ -6,12 +6,14 @@ import java.awt.*;
 
 public class PsychoView extends JPanel {
 
-    private JSlider carreraSlider;
-    private JSlider contenidoSlider;
-    private JTextField edadField;
-    private JSlider semestreSlider;
-    private JSlider profesoresSlider;
-    private JButton enviarButton;
+    private JSlider careerMotivation;
+    private JSlider pensum;
+    private JTextField age;
+    private JSlider semester;
+    private JSlider teachers;
+    private JRadioButton siButton;
+    private JRadioButton noButton;
+    private JButton nextButton;
     private JButton backButton;
     private JLabel LabelPage;
 
@@ -45,7 +47,7 @@ public class PsychoView extends JPanel {
         up.add(LabelPage, BorderLayout.EAST);
 
         JLabel icon = new JLabel();
-        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\ueb.png");
+        ImageIcon originalIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\uebIcon.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(60, 50, Image.SCALE_SMOOTH);
         icon.setIcon(new ImageIcon(scaledImage));
         icon.setHorizontalAlignment(SwingConstants.CENTER);
@@ -80,14 +82,14 @@ public class PsychoView extends JPanel {
         
 
         // === CENTER FORM ===
-        ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\bosqu3.png");
+        ImageIcon bgIcon = new ImageIcon("C:\\Users\\Juan\\git\\repository\\FuzzyLogic\\images\\PsychoBackground.png");
         Image bgImage = bgIcon.getImage().getScaledInstance(1261, 520, Image.SCALE_SMOOTH);
         JLabel centerWrapper = new JLabel(new ImageIcon(bgImage));
         centerWrapper.setLayout(new GridBagLayout());
 
         JPanel formPanel = new JPanel(new GridBagLayout());
         formPanel.setBackground(new Color(43, 123, 143, 128));
-        formPanel.setPreferredSize(new Dimension(700, 400));
+        formPanel.setPreferredSize(new Dimension(900, 500));
 
         GridBagConstraints gbc;
 
@@ -99,25 +101,25 @@ public class PsychoView extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(10, 10, 20, 10);
         JLabel titulo = new JLabel("Situación Psicosocial");
-        titulo.setFont(new Font("Arial", Font.BOLD, 24));
+        titulo.setFont(new Font("Arial", Font.BOLD, 30));
         titulo.setForeground(Color.WHITE);
         formPanel.add(titulo, gbc);
 
         // Pregunta 1
         gbc = new GridBagConstraints();
         gbc.gridx = 0; gbc.gridy = 1; gbc.anchor = GridBagConstraints.WEST; gbc.insets = new Insets(10,10,5,10);
-        JLabel label1 = new JLabel("1) ¿Qué tan satisfecho se siente con su carrera? (1 a 10):");
+        JLabel label1 = new JLabel("1) ¿Qué tan motivado se siente con terminar su carrera? (1 a 10):");
         label1.setFont(new Font("Arial", Font.BOLD, 18));
         label1.setForeground(Color.WHITE);
         formPanel.add(label1, gbc);
 
-        carreraSlider = new JSlider(1, 10, 5);
-        carreraSlider.setMajorTickSpacing(1);
-        carreraSlider.setPaintTicks(true);
-        carreraSlider.setPaintLabels(true);
+        careerMotivation = new JSlider(1, 10, 5);
+        careerMotivation.setMajorTickSpacing(1);
+        careerMotivation.setPaintTicks(true);
+        careerMotivation.setPaintLabels(true);
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.insets = new Insets(10,10,5,10);
-        formPanel.add(carreraSlider, gbc);
+        formPanel.add(careerMotivation, gbc);
 
         // Pregunta 2
         gbc = new GridBagConstraints();
@@ -127,13 +129,13 @@ public class PsychoView extends JPanel {
         label2.setForeground(Color.WHITE);
         formPanel.add(label2, gbc);
 
-        contenidoSlider = new JSlider(1, 10, 5);
-        contenidoSlider.setMajorTickSpacing(1);
-        contenidoSlider.setPaintTicks(true);
-        contenidoSlider.setPaintLabels(true);
+        pensum = new JSlider(1, 10, 5);
+        pensum.setMajorTickSpacing(1);
+        pensum.setPaintTicks(true);
+        pensum.setPaintLabels(true);
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 2; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.insets = new Insets(10,10,5,10);
-        formPanel.add(contenidoSlider, gbc);
+        formPanel.add(pensum, gbc);
 
         // Pregunta 3 - Edad
         gbc = new GridBagConstraints();
@@ -143,10 +145,10 @@ public class PsychoView extends JPanel {
         label3.setForeground(Color.WHITE);
         formPanel.add(label3, gbc);
 
-        edadField = new JTextField();
+        age = new JTextField();
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 3; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.insets = new Insets(10,10,5,10);
-        formPanel.add(edadField, gbc);
+        formPanel.add(age, gbc);
 
         // Pregunta 4 - Semestre
         gbc = new GridBagConstraints();
@@ -156,13 +158,13 @@ public class PsychoView extends JPanel {
         label4.setForeground(Color.WHITE);
         formPanel.add(label4, gbc);
 
-        semestreSlider = new JSlider(1, 10, 1);
-        semestreSlider.setMajorTickSpacing(1);
-        semestreSlider.setPaintTicks(true);
-        semestreSlider.setPaintLabels(true);
+        semester = new JSlider(1, 10, 1);
+        semester.setMajorTickSpacing(1);
+        semester.setPaintTicks(true);
+        semester.setPaintLabels(true);
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 4; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.insets = new Insets(10,10,5,10);
-        formPanel.add(semestreSlider, gbc);
+        formPanel.add(semester, gbc);
 
         // Pregunta 5
         gbc = new GridBagConstraints();
@@ -172,36 +174,86 @@ public class PsychoView extends JPanel {
         label5.setForeground(Color.WHITE);
         formPanel.add(label5, gbc);
 
-        profesoresSlider = new JSlider(1, 10, 5);
-        profesoresSlider.setMajorTickSpacing(1);
-        profesoresSlider.setPaintTicks(true);
-        profesoresSlider.setPaintLabels(true);
+        teachers = new JSlider(1, 10, 5);
+        teachers.setMajorTickSpacing(1);
+        teachers.setPaintTicks(true);
+        teachers.setPaintLabels(true);
         gbc = new GridBagConstraints();
         gbc.gridx = 1; gbc.gridy = 5; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.insets = new Insets(10,10,5,10);
-        formPanel.add(profesoresSlider, gbc);
+        formPanel.add(teachers, gbc);
 
-        // Botón enviar
-        enviarButton = new JButton("Siguiente");
-        enviarButton.setBackground(new Color(255, 121, 0));
-        enviarButton.setForeground(Color.WHITE);
-        enviarButton.setFont(new Font("Arial", Font.BOLD, 26));
+        
+     // Pregunta 6 - ¿Ha pensado en abandonar la carrera?
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 6;
-        gbc.gridwidth = 2;
-        gbc.insets = new Insets(20, 10, 10, 10);
-        formPanel.add(enviarButton, gbc);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(10, 10, 5, 10);
+        JLabel label6 = new JLabel("6) ¿Ha pensado en abandonar la carrera?");
+        label6.setFont(new Font("Arial", Font.BOLD, 18));
+        label6.setForeground(Color.WHITE);
+        formPanel.add(label6, gbc);
+        // Botones de opción
+        siButton = new JRadioButton("Sí");
+   //     siButton.setBackground(new Color(43, 123, 143));
+        siButton.setForeground(Color.black);
+        noButton = new JRadioButton("No");
+     //   noButton.setBackground(new Color(43, 123, 143));
+        noButton.setForeground(Color.black);
+
+        
+
+        // Agrupar los botones para que solo se pueda seleccionar uno
+        ButtonGroup group = new ButtonGroup();
+        group.add(siButton);
+        group.add(noButton);
+        
+
+        // Panel para los botones
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(43, 123, 143)); // o el color que estés usando
+        buttonPanel.add(siButton);
+        buttonPanel.add(noButton);
+
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 6;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(10, 10, 5, 10);
+        formPanel.add(buttonPanel, gbc);
 
         centerWrapper.add(formPanel, new GridBagConstraints());
+        
+                // Botón enviar
+                nextButton = new JButton("Siguiente");
+                nextButton.setBackground(new Color(255, 121, 0));
+                nextButton.setForeground(Color.WHITE);
+                nextButton.setFont(new Font("Arial", Font.BOLD, 26));
+                gbc = new GridBagConstraints();
+                gbc.gridx = 0;
+                gbc.gridy = 7;
+                gbc.gridwidth = 2;
+                gbc.insets = new Insets(20, 10, 10, 10);
+                formPanel.add(nextButton, gbc);
         add(centerWrapper, BorderLayout.CENTER);
     }
 
+    public Boolean getDropOut() {
+        if (siButton.isSelected()) {
+            return true;
+        } else if (noButton.isSelected()) {
+            return false;
+        } else {
+            return null; // En caso de que no haya selección
+        }
+    }
+
     // === Getters ===
-    public JSlider getCarreraSlider() { return carreraSlider; }
-    public JSlider getContenidoSlider() { return contenidoSlider; }
-    public JTextField getEdadField() { return edadField; }
-    public JSlider getSemestreSlider() { return semestreSlider; }
-    public JSlider getProfesoresSlider() { return profesoresSlider; }
-    public JButton getEnviarButton() { return enviarButton; }
+    public JSlider getCareerMotivation() { return careerMotivation; }
+    public JSlider getPensum() { return pensum; }
+    public JTextField getAge() { return age; }
+    public JSlider getSemester() { return semester; }
+    public JSlider getTeachers() { return teachers; }
+    public JButton getNextButton() { return nextButton; }
     public JButton getBackButton() { return backButton; }
 }
